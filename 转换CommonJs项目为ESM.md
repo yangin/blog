@@ -3,6 +3,7 @@
 - [转换 CommonJS 项目为 ESM](#转换-commonjs-项目为-esm)
   - [背景](#背景)
   - [怎么转换 CommonJS 项目为 ESM](#怎么转换-commonjs-项目为-esm)
+  - [FAQ](#faq)
   - [参考](#参考)
 
 ## 背景
@@ -15,14 +16,20 @@ NodeJs 自 v12.17.0 起，支持了 ESM 模块，但是默认情况下，NodeJs 
 
 ## 怎么转换 CommonJS 项目为 ESM
 
-- 在你的 package.json 中添加 "type": "module" 字段。
-- 在你的 package.json 中将"main":"index.js" 改为 "exports":"./index.js"。
-- 更新 package.json 中的 "engines" 字段，指定 NodeJs 版本为 "node": ">=14.16"。
+- 在你的 package.json 中添加 `"type": "module"` 字段。
+- 在你的 package.json 中将 `"main":"index.js"` 改为 `"exports":"./index.js"`。
+- 更新 package.json 中的 `"engines"` 字段，指定 NodeJs 版本为 `"node": ">=14.16"`。
 - 从所有 Javascript 文件中移除 `'use strict';` 。
-- 用 import/export 语法替换 require()/module.export 语法。
-- 仅使用完整的相对文件路径进行导入:import x from '.'; -> import x from './index.js';。
+- 用 `import/export` 语法替换 `require()/module.export` 语法。
+- 仅使用完整的相对文件路径进行导入:`import x from '.';` -> `import x from './index.js';`。
 - 如果你有一个 Typescript 的类型定义文件（例如，index.d.ts），那么你需要使用 ESM imports/exports 更新它。
-- 可选但推荐使 `node: protocol` 显式引入 node 模块 :import fs from 'fs'; -> import fs from 'node:fs';。
+- 可选但推荐使 `node: protocol` 显式引入 node 模块 :`import fs from 'fs';` -> `import fs from 'node:fs';`。
+
+## FAQ
+
+**如果不转换 CommonJS 项目为 ESM, 怎么修复第三方库 `require() is not support` 错误？**
+
+使用第三方库旧的支持 require 的版本
 
 ## 参考
 
