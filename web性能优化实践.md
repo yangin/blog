@@ -1,19 +1,20 @@
-# Web性能优化
+# Web 性能优化实践
 
 ## 优化步骤
 
-1. 将所有第三方CND引入改为本地加载；
+1. 将所有第三方 CND 引入改为本地加载；
 2. 将所有图片等静态资源进行压缩，减小加载体积；
 3. 移除不必要的依赖包；
-4. 将大体积的依赖包（如echarts等）单独拆出来，进行动态引入；
-5. 将首页非必要的静态资源引入（link、script等引入方式）改为动态引入
-6. 灵活运用script标签的 async 与 defer属性，让首页的js加载更快；
-
+4. 将大体积的依赖包（如 echarts 等）单独拆出来，进行动态引入；
+5. 将首页非必要的静态资源引入（link、script 等引入方式）改为动态引入
+6. 灵活运用 script 标签的 async 与 defer 属性，让首页的 js 加载更快；
 
 ## 将静态引入改为动态引入
+
 `js脚本执行会消耗较多时间，所以将首页非必要的脚本从首页移除，改为动态加载，来提升性能`
 
-核心加载脚本代码load.ts:
+核心加载脚本代码 load.ts:
+
 ```javascript
 /**
  * 动态加载一组脚本
@@ -37,8 +38,8 @@ export function loadScript(urls: string[], callback: () => void) {
   const total = urls.length;
   let loaded = 0;
   let error = false;
-  urls.forEach(url => {
-    const script = document.createElement('script');
+  urls.forEach((url) => {
+    const script = document.createElement("script");
     script.src = url;
     script.onload = () => {
       loaded += 1;
@@ -59,13 +60,17 @@ export function loadScript(urls: string[], callback: () => void) {
 ```
 
 使用方法：
+
 ```javascript
-  useEffect(() => {
-    // 加载初始化所需要的脚本
-    loadScript([
-      '/neditor/neditor.config.js',
-      '/neditor/neditor.all.js',
-      '/neditor/neditor.parse.min.js',
-    ], initEditor);
-  }, []);
+useEffect(() => {
+  // 加载初始化所需要的脚本
+  loadScript(
+    [
+      "/neditor/neditor.config.js",
+      "/neditor/neditor.all.js",
+      "/neditor/neditor.parse.min.js",
+    ],
+    initEditor
+  );
+}, []);
 ```
