@@ -222,6 +222,8 @@ parent didMount
 
 ### 7. React 事件和原生事件执行顺序
 
+> 这里的原生事件，实际指的是标准模型事件，即 addEventListener 绑定的事件。
+
 ```jsx
 // React 事件和原生事件的执行顺序
 import React from "react";
@@ -272,10 +274,10 @@ export default EventRunOrder;
 结果：
 
 ```js
-react child
 dom child
-react parent
 dom parent
+react child
+react parent
 document
 ```
 

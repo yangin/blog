@@ -1276,7 +1276,6 @@ XSS (Cross Site Scripting) 攻击是指攻击者在网站上注入恶意的客�
   > 后端过滤无法保证输入与输出的效果一致
 - 设置 httpOnly 属性，禁止 js 访问某些敏感的 cookie
 - 设置 CSP（Content Security Policy）策略，限制加载资源的域名
-- 设置 X-XSS-Protection 响应头，开启浏览器的 XSS 过滤功能
 - 控制浏览器的输出，如避免使用不安全的 innerHTML、outerHTML 等，vue，react 中的 v-html，dangerouslySetInnerHTML 等，替代方案：innerText、textContent（推荐）。
 
 ### Q2: CSRF 攻击
